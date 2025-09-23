@@ -1,6 +1,8 @@
 import User from "../models/User.js"
 import bcrypt from 'bcryptjs'
 import {generateToken} from "../lib/utils.js"
+import { sendWelcomeEmail } from "../email/emailHandler.js"
+import "dotenv/config"
 
 export const signup= async(req,res)=>{
     const {fullName,email,password}=req.body
@@ -33,6 +35,12 @@ export const signup= async(req,res)=>{
             profilePic:newUser.profilePic,
 
         });
+        try {
+            await sendWelcomeEmail(newUser.email,newUser.fullName,process.env.CLIENT_URL)
+        } catch (error) {
+            console.log("fail to send welcome email");
+            
+        }
 
     }
     else{
