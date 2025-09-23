@@ -53,3 +53,32 @@ export const signup= async(req,res)=>{
         
     }
 }
+
+export const login=async(req,res)=>{
+const {email,password}=req.body
+try {
+    const user=await User.findOne({email})
+    if (!user) return res.json({message:"invalid creditenials"})//never tell the client which one is incoreect
+    const isPassword=await bcrypt.compare(password,user.password)
+    if(!isPassword) return res.json({message:"invalid creditenials"})
+    generateToken(user._id,res);
+     res.status(201).json({
+            _id:user._id,
+            fullName:user.fullName,
+            email:user.email,
+            profilePic:user.profilePic,
+
+        });
+   
+} catch (error) {
+    console.log("error in login controller");
+    res.status(500).json({message:"internal server error"})
+    
+}
+}
+
+export const logout=(req,res)=>{
+    res.cookies("jwt","",{maxAge:0})
+    res.status(200).json({message:"logout succesfully"})
+}
+
