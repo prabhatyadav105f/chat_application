@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs'
 import {generateToken} from "../lib/utils.js"
 import { sendWelcomeEmail } from "../email/emailHandler.js"
 import "dotenv/config"
+import cloudinary from "../lib/cloudinary.js"
 
 export const signup= async(req,res)=>{
     const {fullName,email,password}=req.body
@@ -80,5 +81,19 @@ try {
 export const logout=(req,res)=>{
     res.cookies("jwt","",{maxAge:0})
     res.status(200).json({message:"logout succesfully"})
+}
+
+
+export const updateProfile=async(req,res)=>{
+    try {
+        const {profilePic}=req.body;
+        if(!profilePic) return res.status.json({message:"profilepic is required"})
+        const userId=req.user._id;
+        const uploadResponse=await cloudinary.uploader.upload(profilePic)
+        const updatedUser=await User.findByIdAndUpdate(userId,{profilePic:uploadResponse.secure_url},{new:true})
+        res.status(200).json(updatedUser)
+    } catch (error) {
+        res.status(500).json({message:"internal server error"})
+    }
 }
 
