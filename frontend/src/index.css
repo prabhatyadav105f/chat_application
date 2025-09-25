@@ -1,3 +1,90 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+/* ---------- Labels ---------- */
+.auth-input-label {
+  display: block;
+  font-size: 0.9rem;
+  color: #cbd5e1; /* slate-400 */
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+}
+
+/* ---------- Input Fields ---------- */
+.input {
+  width: 100%;
+  padding: 0.65rem 2.5rem; /* space for icon */
+  border-radius: 0.5rem;
+  border: 1px solid rgba(100, 116, 139, 0.4); /* slate-600/40 */
+  background-color: rgba(15, 23, 42, 0.6); /* slate-900/60 */
+  color: #f1f5f9; /* slate-100 */
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.input:focus {
+  border-color: #22d3ee; /* cyan-400 */
+  box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.2);
+}
+
+/* ---------- Input Icons ---------- */
+.auth-input-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8; /* slate-400 */
+  width: 18px;
+  height: 18px;
+}
+
+/* ---------- Button ---------- */
+.auth-btn {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: linear-gradient(to right, #06b6d4, #3b82f6); /* cyan to blue */
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.25s ease-in-out;
+  border: none;
+  cursor: pointer;
+}
+
+.auth-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.auth-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(34, 211, 238, 0.3);
+}
+
+/* ---------- Link ---------- */
+.auth-link {
+  font-size: 0.9rem;
+  color: #22d3ee; /* cyan-400 */
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Badge ---------- */
+.auth-badge {
+  display: inline-block;
+  padding: 0.35rem 0.8rem;
+  background-color: rgba(34, 211, 238, 0.15);
+  color: #22d3ee;
+  font-size: 0.8rem;
+  border-radius: 9999px;
+  font-weight: 500;
+}
